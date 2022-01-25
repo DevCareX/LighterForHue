@@ -1,4 +1,5 @@
 ﻿using LightControl.UI.Models;
+using LightControl.UI.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -20,15 +21,15 @@ namespace LightControl.UI.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> TestAPI()
         {
-            return View();
-        }
+            HueHttpClient hueHttpClient = new HueHttpClient(_configuration.GetSection("HueSettings"));
+            var response = await hueHttpClient.APITest();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewBag.Response = response;
+            
+            return View("Index");
         }
+        
     }
 }

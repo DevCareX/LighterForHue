@@ -4,5 +4,19 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1>
+        TEST YOUR HUE CONNECTION --->
+
+        <form asp-action="TestAPI" method="get">
+            <button asp-action="TestAPI" asp-controller="Home" type="submit">Test api</button>
+        </form>
+
+        @if(ViewBag.Response != null)
+        {
+            <partial>@ViewBag.Response</partial>
+        }
+
+    </h1>
+
+
 </div>
