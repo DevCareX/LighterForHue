@@ -1,4 +1,6 @@
 ﻿using LightControl.UI.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace LightControl.UI.Services
 {
@@ -37,15 +39,44 @@ namespace LightControl.UI.Services
                 lightsResponse.EnsureSuccessStatusCode();
 
                 string responseBody = await lightsResponse.Content.ReadAsStringAsync();
+
                 _logger.LogInformation(responseBody);
 
-                return lightsResponse.Content.ToString();
+                //responseBody = "[" + responseBody + "]";
+
+                return IsValidJson(responseBody) ? responseBody : String.Empty;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
                 return "ERROR: " + ex.Message;
             }
+        }
+
+        public bool IsValidJson(string stringValue)
+        {
+            if (string.IsNullOrWhiteSpace(stringValue))
+            {
+                return false;
+            }
+
+            var value = stringValue.Trim();
+
+            if ((value.StartsWith("{") && value.EndsWith("}")) || //For object
+                (value.StartsWith("[") && value.EndsWith("]"))) //For array
+            {
+                try
+                {
+                    var obj = JToken.Parse(value);
+                    return true;
+                }
+                catch (JsonReaderException)
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
 
         private HttpClient ConfigureHttpClient()

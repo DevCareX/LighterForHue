@@ -1,11 +1,11 @@
-﻿using LightControl.UI.Utils;
+﻿using LightControl.UI.Models;
 
 namespace LightControl.UI.Services
 {
     public interface IHueLightService
     {
-        Task<string> GetLights();
+        Task<LightResponse> GetLights();
 
-        Task<string> GetLight(string id);
+        Task<LightResponse> GetLight(string id);
     }
 }

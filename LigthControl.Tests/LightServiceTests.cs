@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 namespace LigthControl.Tests
 {
     [TestClass]
-    public class LightServiceSetup
+    public class LightServiceTests
     {
         private HueSettingsConfig _hueSettings { get; set; }
 
         private HueLightService _hueLightService { get; set; }
-                
+
         [TestInitialize]
         public void Setup()
         {
@@ -32,11 +32,19 @@ namespace LigthControl.Tests
         }
 
         [TestMethod]
-        public void SmokeTestThis()
+        public void GetAllLights_ReturnsSomething()
         {
-            var lightResponse = Task.Run(() =>_hueLightService.GetLights()).GetAwaiter().GetResult();
+            var lightResponse = Task.Run(() => _hueLightService.GetLights()).GetAwaiter().GetResult();
 
-            Assert.IsTrue(lightResponse.Length > 0);
+            Assert.IsTrue(lightResponse.Data.Length > 1);
+        }
+
+        [TestMethod]
+        public void GetLightByID_ReturnsSomething()
+        {
+            var lightResponse = Task.Run(() => _hueLightService.GetLight("8e054a31-0d01-4f43-bdea-cb1fc05fc0ae")).GetAwaiter().GetResult();
+
+            Assert.IsTrue(lightResponse.Data.Length == 1);
         }
     }
 }
