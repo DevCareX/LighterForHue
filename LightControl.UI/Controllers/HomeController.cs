@@ -1,4 +1,5 @@
 ﻿using LightControl.UI.Models;
+using LightControl.UI.Services;
 using LightControl.UI.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -8,12 +9,12 @@ namespace LightControl.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IConfiguration _configuration;
+        private readonly IHueLightService _lightService;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        public HomeController(ILogger<HomeController> logger, IHueLightService lightService)
         {
             _logger = logger;
-            _configuration = configuration;
+            _lightService = lightService;
         }
 
         public IActionResult Index()
@@ -23,8 +24,7 @@ namespace LightControl.UI.Controllers
 
         public async Task<IActionResult> TestAPI()
         {
-            HueHttpClient hueHttpClient = new HueHttpClient(_configuration.GetSection("HueSettings"));
-            var response = await hueHttpClient.APITest();
+            var response = await _lightService.GetLights();
 
             ViewBag.Response = response;
             
