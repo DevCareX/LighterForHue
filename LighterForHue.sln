@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lighter.UI", "Lighter.UI\Lighter.UI.csproj", "{9BAD9275-F892-4481-BD43-A7CD63007E52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightControl.UI", "LightControl.UI\LightControl.UI.csproj", "{0E7EF39C-9301-4A06-A9B8-6519A590329A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9BAD9275-F892-4481-BD43-A7CD63007E52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BAD9275-F892-4481-BD43-A7CD63007E52}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BAD9275-F892-4481-BD43-A7CD63007E52}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BAD9275-F892-4481-BD43-A7CD63007E52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E7EF39C-9301-4A06-A9B8-6519A590329A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E7EF39C-9301-4A06-A9B8-6519A590329A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E7EF39C-9301-4A06-A9B8-6519A590329A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E7EF39C-9301-4A06-A9B8-6519A590329A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
