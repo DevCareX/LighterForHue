@@ -8,7 +8,7 @@
 
         public HueLightService(IConfiguration configuration, ILogger<HueServiceAbstract> logger, ILogger<HueLightService> lightLogger) : base(configuration, logger)
         {
-            ApiServicePrefix = "/lights";
+            ApiServicePrefix = "/resource/light";
             _lightLogger = lightLogger;
         }
 
@@ -26,6 +26,11 @@
                 _lightLogger.LogError("ERROR: " + ex.Message);
                 throw;
             }
+        }
+
+        public Task<string> GetLight(string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

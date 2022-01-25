@@ -26,6 +26,7 @@ namespace LightControl.UI.Services
                 string apiUrl = string.Format("{0}{1}", HueAPIHttpClient.BaseAddress.ToString(), apiPrefix);
 
                 var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
+                request.Headers.Add("hue-application-key", HueSettings.HueRegisterKey);
 
                 if (requestBody != null && requestBody.Length > 0)
                 {
@@ -44,7 +45,7 @@ namespace LightControl.UI.Services
             {
                 _logger.LogError(ex.Message);
                 return "ERROR: " + ex.Message;
-            }            
+            }
         }
 
         private HttpClient ConfigureHttpClient()
@@ -61,7 +62,7 @@ namespace LightControl.UI.Services
 
                 return new HttpClient(httpClientHandler)
                 {
-                    BaseAddress = new Uri(String.Format("{0}{1}", HueSettings.HueAPIAddress, HueSettings.HueRegisterKey))
+                    BaseAddress = new Uri(HueSettings.HueAPIAddress)
                 };
             }
             catch (Exception e)
