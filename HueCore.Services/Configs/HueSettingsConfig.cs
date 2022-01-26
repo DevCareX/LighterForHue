@@ -18,14 +18,13 @@ namespace HueCore.Services.Configs
             HueRegisterKey = String.Empty;
         }
 
-        public HueSettingsConfig(IConfigurationSection hueSettings)
+        public HueSettingsConfig(IConfiguration configuration)
         {
-            hueSettingsSection = hueSettings;
-
-            BridgeIP = hueSettingsSection["BridgheIP"];
-            DebugToolAddress = hueSettingsSection["DebugToolAddress"];
-            HueAPIAddress = hueSettingsSection["HueAPIAddress"];
-            HueRegisterKey = hueSettingsSection["HueRegisteredKey"];
+            var hueSection = configuration.GetSection("HueSettings");
+            BridgeIP = hueSection["BridgheIP"];
+            DebugToolAddress = hueSection["DebugToolAddress"];
+            HueAPIAddress = hueSection["HueAPIAddress"];
+            HueRegisterKey = hueSection["HueRegisteredKey"];
         }
         public static HueSettingsConfig GetHueConfiguration(string outputPath)
         {

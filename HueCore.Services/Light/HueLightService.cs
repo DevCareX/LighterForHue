@@ -5,13 +5,13 @@ using Microsoft.Extensions.Logging;
 
 namespace LightControl.UI.Services
 {
-    public class HueLightService : HueServiceAbstract, IHueLightService
+    public class HueLightService : HueHttpClient, IHueLightService
     {
         private string ApiServicePrefix { get; set; }
 
         private ILogger<HueLightService> _lightLogger { get; set; }
 
-        public HueLightService(IConfiguration configuration, ILogger<HueServiceAbstract> logger, ILogger<HueLightService> lightLogger) : base(configuration, logger)
+        public HueLightService(IConfiguration configuration, ILogger<HueHttpClient> logger, ILogger<HueLightService> lightLogger) : base(configuration, logger)
         {
             ApiServicePrefix = "/resource/light";
             _lightLogger = lightLogger;

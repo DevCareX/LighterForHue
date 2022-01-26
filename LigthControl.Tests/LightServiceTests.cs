@@ -22,7 +22,7 @@ namespace LigthControl.Tests
         public void Setup()
         {
             string outputPath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(HueSettingsConfig)).Location);
-            var abstractLogger = new Mock<ILogger<HueServiceAbstract>>();
+            var abstractLogger = new Mock<ILogger<HueHttpClient>>();
             var lightLogger = new Mock<ILogger<HueLightService>>();
 
             var config = HueSettingsConfig.GetJsonConfiguration(outputPath);
