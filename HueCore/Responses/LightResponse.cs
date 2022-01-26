@@ -1,7 +1,6 @@
-﻿using HueCore.Domain;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace LightControl.UI.Models
+namespace HueCore.Domain.Responses
 {
 
     public class LightResponse

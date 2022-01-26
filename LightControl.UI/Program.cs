@@ -1,9 +1,11 @@
+using HueCore.Services.Abstract;
 using LightControl.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddSingleton<IHueLightService, HueLightService>();
      
 var app = builder.Build();

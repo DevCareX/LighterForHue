@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightControl.UI", "LightCon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LigthControl.Tests", "LigthControl.Tests\LigthControl.Tests.csproj", "{84688D4A-8B60-4098-91A7-4CF743FF123C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HueCore", "HueCore\HueCore.csproj", "{53FE4295-3F4E-4C33-95B6-70E407962F9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HueCoreModels", "HueCore\HueCoreModels.csproj", "{53FE4295-3F4E-4C33-95B6-70E407962F9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HueCore.Services", "HueCore.Services\HueCore.Services.csproj", "{C5A43EAF-614E-4392-B72A-EBB3FEF4CB39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{53FE4295-3F4E-4C33-95B6-70E407962F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53FE4295-3F4E-4C33-95B6-70E407962F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53FE4295-3F4E-4C33-95B6-70E407962F9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5A43EAF-614E-4392-B72A-EBB3FEF4CB39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5A43EAF-614E-4392-B72A-EBB3FEF4CB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5A43EAF-614E-4392-B72A-EBB3FEF4CB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5A43EAF-614E-4392-B72A-EBB3FEF4CB39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

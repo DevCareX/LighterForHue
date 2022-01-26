@@ -1,8 +1,5 @@
-﻿using LightControl.UI.Models;
-using LightControl.UI.Services;
-using LightControl.UI.Utils;
+﻿using HueCore.Services.Abstract;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace LightControl.UI.Controllers
 {
