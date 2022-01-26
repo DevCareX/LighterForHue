@@ -1,6 +1,4 @@
 ﻿using HueCore.Services.Configs;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 
@@ -10,19 +8,9 @@ namespace HueCore.Services.Abstract
     {
         private static HueSettingsConfig HueSettings { get; set; }
 
-        private ILogger<HueHttpClient> _logger;
-
-        public HueHttpClient(IConfiguration configuration, ILogger<HueHttpClient> logger)
+        public HueHttpClient()
         {
-            if (configuration == null)
-                throw new ArgumentNullException(nameof(configuration));
-
-            if (logger == null)
-                throw new ArgumentException(nameof(logger));
-
-            HueSettings = new HueSettingsConfig(configuration);
-
-            _logger = logger;
+            HueSettings = new HueSettingsConfig();
         }
 
         protected async Task<T> MakeRequest<T>(string httpMethod, string route, Dictionary<string, string> postParams = null)
@@ -36,7 +24,7 @@ namespace HueCore.Services.Abstract
             }))
             {
                 HttpRequestMessage requestMessage = new HttpRequestMessage(new HttpMethod(httpMethod), $"{HueSettings.HueAPIAddress}/{route}");
-                requestMessage.Headers.Add("hue-application-key", HueSettings.HueRegisterKey);
+                requestMessage.Headers.Add("hue-application-key", HueSettings.HueRegisteredKey);
 
                 if (postParams != null)
                 {
@@ -50,8 +38,6 @@ namespace HueCore.Services.Abstract
 
                 try
                 {
-                    _logger.LogInformation(apiResponse);
-
                     // Attempt to deserialise the reponse to the desired type, otherwise throw an expetion with the response from the api.
                     if (!string.IsNullOrEmpty(apiResponse))
                         return JsonConvert.DeserializeObject<T>(apiResponse);
@@ -60,7 +46,6 @@ namespace HueCore.Services.Abstract
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex.Message);
                     throw new Exception($"An error ocurred while calling the API. It responded with the following message: {response.StatusCode} {response.ReasonPhrase}");
                 }
             }
@@ -77,10 +62,11 @@ namespace HueCore.Services.Abstract
             }))
             {
                 HttpRequestMessage requestMessage = new HttpRequestMessage(new HttpMethod(httpMethod), $"{HueSettings.HueAPIAddress}/{route}");
-                requestMessage.Headers.Add("hue-application-key", HueSettings.HueRegisterKey);
+                requestMessage.Headers.Add("hue-application-key", HueSettings.HueRegisteredKey);
 
                 if (postObject != null)
-                {                                    requestMessage.Content = JsonContent.Create(postObject);
+                {
+                    requestMessage.Content = JsonContent.Create(postObject);
                     requestMessage.Headers.Add("media-type", "application/json");
                 }
 
@@ -91,8 +77,6 @@ namespace HueCore.Services.Abstract
 
                 try
                 {
-                    _logger.LogInformation(apiResponse);
-
                     // Attempt to deserialise the reponse to the desired type, otherwise throw an expetion with the response from the api.
                     if (!string.IsNullOrEmpty(apiResponse))
                         return JsonConvert.DeserializeObject<T>(apiResponse);
@@ -101,7 +85,6 @@ namespace HueCore.Services.Abstract
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex.Message);
                     throw new Exception($"An error ocurred while calling the API. It responded with the following message: {response.StatusCode} {response.ReasonPhrase}");
                 }
             }

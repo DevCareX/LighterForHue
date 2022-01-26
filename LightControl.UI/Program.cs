@@ -1,5 +1,7 @@
 using HueCore.Services.Abstract;
-using LightControl.UI.Services;
+using LightControl.Services;
+using MediatR;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IHueLightService, HueLightService>();
+
+builder.Services.AddMediatR(Assembly.GetCallingAssembly());
      
 var app = builder.Build();
 

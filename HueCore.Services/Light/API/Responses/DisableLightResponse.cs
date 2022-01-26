@@ -1,7 +1,7 @@
 ﻿using HueCore.HueAPIObjects;
 using Newtonsoft.Json;
 
-namespace HueApp.BusinessLogic.Lights.Responses
+namespace HueCore.Services.Light.API.Responses
 {
     public class DisableLightResponse
     {

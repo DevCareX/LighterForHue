@@ -1,16 +1,16 @@
 ﻿using HueCore.HueAPIObjects;
 
-namespace HueApp.BusinessLogic.Lights.Requests
+namespace HueCore.Services.Light.API.Requests
 {
-    public class EnableLightRequest
+    public class DisableLightRequest
     {
         public On On { get; set; }
 
-        public EnableLightRequest()
+        public DisableLightRequest()
         {
             On = new On()
             {
-                on = true
+                on = false
             };
         }
     }

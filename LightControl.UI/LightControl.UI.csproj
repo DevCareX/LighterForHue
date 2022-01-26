@@ -7,12 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HueCore.Services\HueCore.Services.csproj" />
-    <ProjectReference Include="..\HueCore\HueCoreModels.csproj" />
+    <ProjectReference Include="..\HueApp.BusinessLogic\HueApp.BusinessLogic.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,21 +1,17 @@
-﻿using HueApp.BusinessLogic.Lights.Requests;
-using HueApp.BusinessLogic.Lights.Responses;
-using HueCore.Services.Abstract;
-using Microsoft.Extensions.Configuration;
+﻿using HueCore.Services.Abstract;
+using HueCore.Services.Light.API.Requests;
+using HueCore.Services.Light.API.Responses;
 using Microsoft.Extensions.Logging;
 
-namespace LightControl.UI.Services
+namespace LightControl.Services
 {
     public class HueLightService : HueHttpClient, IHueLightService
     {
         private string ApiServicePrefix { get; set; }
 
-        private ILogger<HueLightService> _lightLogger { get; set; }
-
-        public HueLightService(IConfiguration configuration, ILogger<HueHttpClient> logger, ILogger<HueLightService> lightLogger) : base(configuration, logger)
+        public HueLightService() : base()
         {
             ApiServicePrefix = "/resource/light";
-            _lightLogger = lightLogger;
         }
 
         public async Task<GetLightResponse> GetLights()
@@ -23,13 +19,11 @@ namespace LightControl.UI.Services
             try
             {
                 var response = await MakeRequest<GetLightResponse>("get", ApiServicePrefix);
-                _lightLogger.LogInformation("OK");
 
                 return response;
             }
             catch (Exception ex)
             {
-                _lightLogger.LogError("ERROR: " + ex.Message);
                 throw;
             }
         }
@@ -39,13 +33,11 @@ namespace LightControl.UI.Services
             try
             {
                 var response = await MakeRequest<GetLightResponse>("get", string.Format("{0}/{1}", ApiServicePrefix, lightId));
-                _lightLogger.LogInformation("OK");
 
                 return response;
             }
             catch (Exception ex)
             {
-                _lightLogger.LogError("ERROR: " + ex.Message);
                 throw;
             }
         }
@@ -59,13 +51,11 @@ namespace LightControl.UI.Services
                     string.Format("{0}/{1}", ApiServicePrefix, lightId),
                      new EnableLightRequest());
 
-                _lightLogger.LogInformation("OK");
 
                 return response;
             }
             catch (Exception ex)
             {
-                _lightLogger.LogError("ERROR: " + ex.Message);
                 throw;
             }
         }
@@ -79,13 +69,10 @@ namespace LightControl.UI.Services
                     string.Format("{0}/{1}", ApiServicePrefix, lightId),
                     new DisableLightRequest());
 
-                _lightLogger.LogInformation("OK");
-
                 return response;
             }
             catch (Exception ex)
             {
-                _lightLogger.LogError("ERROR: " + ex.Message);
                 throw;
             }
         }

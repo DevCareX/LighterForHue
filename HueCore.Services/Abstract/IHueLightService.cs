@@ -1,4 +1,4 @@
-﻿using HueApp.BusinessLogic.Lights.Responses;
+﻿using HueCore.Services.Light.API.Responses;
 
 namespace HueCore.Services.Abstract
 {

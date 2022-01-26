@@ -1,42 +1,21 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace HueCore.Services.Configs
 {
     public class HueSettingsConfig
     {
-        private IConfigurationSection hueSettingsSection;
         public string BridgeIP { get; set; }
         public string DebugToolAddress { get; set; }
         public string HueAPIAddress { get; set; }
-        public string HueRegisterKey { get; set; }
+        public string HueRegisteredKey { get; set; }
 
         public HueSettingsConfig()
         {
-            BridgeIP = String.Empty;
-            DebugToolAddress = String.Empty; 
-            HueAPIAddress = String.Empty;
-            HueRegisterKey = String.Empty;
-        }
-
-        public HueSettingsConfig(IConfiguration configuration)
-        {
-            var hueSection = configuration.GetSection("HueSettings");
-            BridgeIP = hueSection["BridgheIP"];
-            DebugToolAddress = hueSection["DebugToolAddress"];
-            HueAPIAddress = hueSection["HueAPIAddress"];
-            HueRegisterKey = hueSection["HueRegisteredKey"];
-        }
-        public static HueSettingsConfig GetHueConfiguration(string outputPath)
-        {
-            var configuration = new HueSettingsConfig();
-
-            var iConfig = GetJsonConfiguration(outputPath);
-
-            iConfig
+            var config = GetJsonConfiguration(Path.GetDirectoryName(Assembly.GetAssembly(typeof(HueSettingsConfig)).Location));
+            config
                 .GetSection("HueSettings")
-                .Bind(configuration);
-
-            return configuration;
+                .Bind(this);
         }
 
         public static IConfiguration GetJsonConfiguration(string outputPath)
@@ -45,7 +24,7 @@ namespace HueCore.Services.Configs
                .SetBasePath(outputPath)
                .AddJsonFile("appsettings.json", optional: false)
                .Build();
-        }      
+        }
     }
 }
 
