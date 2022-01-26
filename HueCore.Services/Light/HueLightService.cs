@@ -1,5 +1,6 @@
 ﻿using HueCore.Domain.Responses;
 using HueCore.Services.Abstract;
+using HueCoreModels.Requests;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -53,11 +54,10 @@ namespace LightControl.UI.Services
         {
             try
             {
-                var response = await MakeRequest<LightResponse>("put", string.Format("{0}/{1}", ApiServicePrefix, lightId),
-                     new Dictionary<string, string>()
-                     {
-                        {"on", "true" }
-                     });
+                var response = await MakeRequest<LightResponse>(
+                    "put",
+                    string.Format("{0}/{1}", ApiServicePrefix, lightId),
+                     new LightOnRequest());
 
                 _lightLogger.LogInformation("OK");
 
@@ -74,11 +74,11 @@ namespace LightControl.UI.Services
         {
             try
             {
-                var response = await MakeRequest<LightResponse>("put", string.Format("{0}/{1}", ApiServicePrefix, lightId),
-                    new Dictionary<string, string>()
-                    {
-                        {"on", "false" }
-                    });
+                var response = await MakeRequest<LightResponse>(
+                    "put",
+                    string.Format("{0}/{1}", ApiServicePrefix, lightId),
+                    new LightOffRequest());
+
                 _lightLogger.LogInformation("OK");
 
                 return response;

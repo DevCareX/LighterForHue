@@ -1,6 +1,7 @@
 using HueCore.Services.Abstract;
 using HueCore.Services.Configs;
 using LightControl.UI.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -16,6 +17,8 @@ namespace LigthControl.Tests
 
         private HueLightService _hueLightService { get; set; }
 
+        private IConfiguration configuration { get; set; }
+
         private string _lightId { get; set; }
 
         [TestInitialize]
@@ -25,10 +28,10 @@ namespace LigthControl.Tests
             var abstractLogger = new Mock<ILogger<HueHttpClient>>();
             var lightLogger = new Mock<ILogger<HueLightService>>();
 
-            var config = HueSettingsConfig.GetJsonConfiguration(outputPath);
-            _lightId = config.GetSection("HueSettings")["LightInHome"].ToString();
+            configuration = HueSettingsConfig.GetJsonConfiguration(outputPath);
+            _lightId = configuration.GetSection("HueSettings")["LightInHome"].ToString();
 
-            _hueLightService = new HueLightService(config, abstractLogger.Object, lightLogger.Object);
+            _hueLightService = new HueLightService(configuration, abstractLogger.Object, lightLogger.Object);
         }
 
         [TestMethod]
@@ -43,6 +46,26 @@ namespace LigthControl.Tests
         public void GetLightByID_ReturnsSomething()
         {
             var lightResponse = Task.Run(() => _hueLightService.GetLight(_lightId)).GetAwaiter().GetResult();
+
+            Assert.IsTrue(lightResponse.Data.Length == 1);
+        }
+
+        [TestMethod]
+        public void TurnOnLight()
+        {
+            _lightId = configuration.GetSection("HueSettings")["WorkLightId"].ToString();
+
+            var lightResponse = Task.Run(() => _hueLightService.TurnLightOn(_lightId)).GetAwaiter().GetResult();
+
+            Assert.IsTrue(lightResponse.Data.Length == 1);
+        }
+
+        [TestMethod]
+        public void TurnOffLight()
+        {
+            _lightId = configuration.GetSection("HueSettings")["WorkLightId"].ToString();
+
+            var lightResponse = Task.Run(() => _hueLightService.TurnLightOff(_lightId)).GetAwaiter().GetResult();
 
             Assert.IsTrue(lightResponse.Data.Length == 1);
         }

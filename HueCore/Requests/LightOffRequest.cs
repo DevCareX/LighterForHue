@@ -2,15 +2,15 @@
 
 namespace HueCoreModels.Requests
 {
-    public class LightOnRequest
+    public class LightOffRequest
     {
         public On On { get; set; }
 
-        public LightOnRequest()
+        public LightOffRequest()
         {
             On = new On()
             {
-                on = true
+                on = false
             };
         }
     }
