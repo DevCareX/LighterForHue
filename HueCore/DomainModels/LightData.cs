@@ -1,6 +1,6 @@
 ﻿namespace HueCore.Domain
 {
-    public class Data
+    public class LightData
     {
         public Alert alert { get; set; }
         public Color color { get; set; }

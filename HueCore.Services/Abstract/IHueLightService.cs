@@ -1,15 +1,15 @@
-﻿using HueCore.Domain.Responses;
+﻿using HueCoreModels.Responses;
 
 namespace HueCore.Services.Abstract
 {
     public interface IHueLightService
     {
-        Task<LightResponse> GetLights();
+        Task<GetLightResponse> GetLights();
 
-        Task<LightResponse> GetLight(string stringId);
+        Task<GetLightResponse> GetLight(string stringId);
 
-        Task<LightResponse> TurnLightOn(string lightId);
+        Task<LightOnResponse> TurnLightOn(string lightId);
 
-        Task<LightResponse> TurnLightOff(string lightId);
+        Task<LightOffResponse> TurnLightOff(string lightId);
     }
 }

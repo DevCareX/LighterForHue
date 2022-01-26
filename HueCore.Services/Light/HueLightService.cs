@@ -1,6 +1,6 @@
-﻿using HueCore.Domain.Responses;
-using HueCore.Services.Abstract;
+﻿using HueCore.Services.Abstract;
 using HueCoreModels.Requests;
+using HueCoreModels.Responses;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -18,11 +18,11 @@ namespace LightControl.UI.Services
             _lightLogger = lightLogger;
         }
 
-        public async Task<LightResponse> GetLights()
+        public async Task<GetLightResponse> GetLights()
         {
             try
             {
-                var response = await MakeRequest<LightResponse>("get", ApiServicePrefix);
+                var response = await MakeRequest<GetLightResponse>("get", ApiServicePrefix);
                 _lightLogger.LogInformation("OK");
 
                 return response;
@@ -34,11 +34,11 @@ namespace LightControl.UI.Services
             }
         }
 
-        public async Task<LightResponse> GetLight(string lightId)
+        public async Task<GetLightResponse> GetLight(string lightId)
         {
             try
             {
-                var response = await MakeRequest<LightResponse>("get", string.Format("{0}/{1}", ApiServicePrefix, lightId));
+                var response = await MakeRequest<GetLightResponse>("get", string.Format("{0}/{1}", ApiServicePrefix, lightId));
                 _lightLogger.LogInformation("OK");
 
                 return response;
@@ -50,11 +50,11 @@ namespace LightControl.UI.Services
             }
         }
 
-        public async Task<LightResponse> TurnLightOn(string lightId)
+        public async Task<LightOnResponse> TurnLightOn(string lightId)
         {
             try
             {
-                var response = await MakeRequest<LightResponse>(
+                var response = await MakeRequest<LightOnResponse>(
                     "put",
                     string.Format("{0}/{1}", ApiServicePrefix, lightId),
                      new LightOnRequest());
@@ -70,11 +70,11 @@ namespace LightControl.UI.Services
             }
         }
 
-        public async Task<LightResponse> TurnLightOff(string lightId)
+        public async Task<LightOffResponse> TurnLightOff(string lightId)
         {
             try
             {
-                var response = await MakeRequest<LightResponse>(
+                var response = await MakeRequest<LightOffResponse>(
                     "put",
                     string.Format("{0}/{1}", ApiServicePrefix, lightId),
                     new LightOffRequest());

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -39,7 +40,7 @@ namespace LigthControl.Tests
         {
             var lightResponse = Task.Run(() => _hueLightService.GetLights()).GetAwaiter().GetResult();
 
-            Assert.IsTrue(lightResponse.Data.Length > 1);
+            Assert.IsTrue(lightResponse.LightDataCollection.Length > 1);
         }
 
         [TestMethod]
@@ -47,7 +48,7 @@ namespace LigthControl.Tests
         {
             var lightResponse = Task.Run(() => _hueLightService.GetLight(_lightId)).GetAwaiter().GetResult();
 
-            Assert.IsTrue(lightResponse.Data.Length == 1);
+            Assert.IsTrue(lightResponse.LightDataCollection.Length == 1);
         }
 
         [TestMethod]
@@ -57,7 +58,8 @@ namespace LigthControl.Tests
 
             var lightResponse = Task.Run(() => _hueLightService.TurnLightOn(_lightId)).GetAwaiter().GetResult();
 
-            Assert.IsTrue(lightResponse.Data.Length == 1);
+            Assert.IsTrue(lightResponse.LightStateChangeData.Count == 1);
+            Assert.IsTrue(lightResponse.LightStateChangeData.First().rid == _lightId);
         }
 
         [TestMethod]
@@ -67,7 +69,8 @@ namespace LigthControl.Tests
 
             var lightResponse = Task.Run(() => _hueLightService.TurnLightOff(_lightId)).GetAwaiter().GetResult();
 
-            Assert.IsTrue(lightResponse.Data.Length == 1);
+            Assert.IsTrue(lightResponse.LightStateChangeData.Count == 1);
+            Assert.IsTrue(lightResponse.LightStateChangeData.First().rid == _lightId);
         }
     }
 }

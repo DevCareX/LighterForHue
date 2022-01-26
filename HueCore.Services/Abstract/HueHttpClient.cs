@@ -80,9 +80,7 @@ namespace HueCore.Services.Abstract
                 requestMessage.Headers.Add("hue-application-key", HueSettings.HueRegisterKey);
 
                 if (postObject != null)
-                {
-                    var jsonSerialized = JsonConvert.SerializeObject(postObject);
-                    requestMessage.Content = JsonContent.Create(postObject);
+                {                                    requestMessage.Content = JsonContent.Create(postObject);
                     requestMessage.Headers.Add("media-type", "application/json");
                 }
 
