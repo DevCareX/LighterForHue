@@ -1,4 +1,4 @@
-﻿using HueCoreModels.Responses;
+﻿using HueApp.BusinessLogic.Lights.Responses;
 
 namespace HueCore.Services.Abstract
 {
@@ -8,8 +8,8 @@ namespace HueCore.Services.Abstract
 
         Task<GetLightResponse> GetLight(string stringId);
 
-        Task<LightOnResponse> TurnLightOn(string lightId);
+        Task<EnableLightResponse> TurnLightOn(string lightId);
 
-        Task<LightOffResponse> TurnLightOff(string lightId);
+        Task<DisableLightResponse> TurnLightOff(string lightId);
     }
 }

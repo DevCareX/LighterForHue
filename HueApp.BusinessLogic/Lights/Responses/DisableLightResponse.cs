@@ -1,9 +1,9 @@
-﻿using HueCoreModels.DomainModels;
+﻿using HueCore.HueAPIObjects;
 using Newtonsoft.Json;
 
-namespace HueCoreModels.Responses
+namespace HueApp.BusinessLogic.Lights.Responses
 {
-    public class LightOffResponse
+    public class DisableLightResponse
     {
         [JsonProperty("data")]
         public List<LightStateChangeData> LightStateChangeData { get; set; }

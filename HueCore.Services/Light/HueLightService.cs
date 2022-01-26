@@ -1,6 +1,6 @@
-﻿using HueCore.Services.Abstract;
-using HueCoreModels.Requests;
-using HueCoreModels.Responses;
+﻿using HueApp.BusinessLogic.Lights.Requests;
+using HueApp.BusinessLogic.Lights.Responses;
+using HueCore.Services.Abstract;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -50,14 +50,14 @@ namespace LightControl.UI.Services
             }
         }
 
-        public async Task<LightOnResponse> TurnLightOn(string lightId)
+        public async Task<EnableLightResponse> TurnLightOn(string lightId)
         {
             try
             {
-                var response = await MakeRequest<LightOnResponse>(
+                var response = await MakeRequest<EnableLightResponse>(
                     "put",
                     string.Format("{0}/{1}", ApiServicePrefix, lightId),
-                     new LightOnRequest());
+                     new EnableLightRequest());
 
                 _lightLogger.LogInformation("OK");
 
@@ -70,14 +70,14 @@ namespace LightControl.UI.Services
             }
         }
 
-        public async Task<LightOffResponse> TurnLightOff(string lightId)
+        public async Task<DisableLightResponse> TurnLightOff(string lightId)
         {
             try
             {
-                var response = await MakeRequest<LightOffResponse>(
+                var response = await MakeRequest<DisableLightResponse>(
                     "put",
                     string.Format("{0}/{1}", ApiServicePrefix, lightId),
-                    new LightOffRequest());
+                    new DisableLightRequest());
 
                 _lightLogger.LogInformation("OK");
 

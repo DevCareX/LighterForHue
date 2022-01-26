@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HueApp.BusinessLogic\HueApp.BusinessLogic.csproj" />
     <ProjectReference Include="..\HueCore\HueCoreModels.csproj" />
   </ItemGroup>
 

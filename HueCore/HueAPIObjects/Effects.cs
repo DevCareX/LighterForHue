@@ -1,4 +1,4 @@
-﻿namespace HueCore.Domain
+﻿namespace HueCore.HueAPIObjects
 {
     public class Effects
     {

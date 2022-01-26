@@ -40,7 +40,7 @@ namespace LigthControl.Tests
         {
             var lightResponse = Task.Run(() => _hueLightService.GetLights()).GetAwaiter().GetResult();
 
-            Assert.IsTrue(lightResponse.LightDataCollection.Length > 1);
+            Assert.IsTrue(lightResponse.LightDataCollection.Count > 1);
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace LigthControl.Tests
         {
             var lightResponse = Task.Run(() => _hueLightService.GetLight(_lightId)).GetAwaiter().GetResult();
 
-            Assert.IsTrue(lightResponse.LightDataCollection.Length == 1);
+            Assert.IsTrue(lightResponse.LightDataCollection.Count == 1);
         }
 
         [TestMethod]

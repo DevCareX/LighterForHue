@@ -1,12 +1,12 @@
-﻿using HueCore.Domain;
+﻿using HueCore.HueAPIObjects;
 
-namespace HueCoreModels.Requests
+namespace HueApp.BusinessLogic.Lights.Requests
 {
-    public class LightOffRequest
+    public class DisableLightRequest
     {
         public On On { get; set; }
 
-        public LightOffRequest()
+        public DisableLightRequest()
         {
             On = new On()
             {
